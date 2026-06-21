@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard – Besant Technologies{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <h1><i class="fas fa-tachometer-alt"></i> Admin Dashboard</h1>
+    <p>Overview of registrations and attendance data.</p>
+    <nav class="breadcrumb"><a href="{{ url_for('index') }}">Home</a> › Admin</nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <!-- KPI Cards -->
+    <div class="kpi-grid">
+      <div class="kpi-card kpi-blue">
+        <i class="fas fa-users"></i>
+        <div><strong>{{ total_reg }}</strong><span>Total Registrations</span></div>
+      </div>
+      <div class="kpi-card kpi-green">
+        <i class="fas fa-clipboard-check"></i>
+        <div><strong>{{ today_att }}</strong><span>Today's Attendance</span></div>
+      </div>
+      <div class="kpi-card kpi-orange">
+        <i class="fas fa-book-open"></i>
+        <div><strong>{{ total_courses }}</strong><span>Active Courses</span></div>
+      </div>
+      <div class="kpi-card kpi-purple">
+        <i class="fas fa-calendar-alt"></i>
+        <div><strong>{{ today }}</strong><span>Today's Date</span></div>
+      </div>
+    </div>
+
+    <!-- Quick Nav -->
+    <div class="admin-nav-cards">
+      <a href="{{ url_for('admin_registrations') }}" class="admin-nav-card">
+        <i class="fas fa-list"></i> All Registrations
+      </a>
+      <a href="{{ url_for('admin_attendance') }}" class="admin-nav-card">
+        <i class="fas fa-calendar-check"></i> Attendance Logs
+      </a>
+    </div>
+
+    <div class="admin-grid">
+      <!-- Recent Registrations -->
+      <div class="table-card">
+        <h3>Recent Registrations (Last 10)</h3>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr><th>ID</th><th>Name</th><th>Email</th><th>Course</th><th>Date</th></tr>
+            </thead>
+            <tbody>
+              {% for r in recent_regs %}
+              <tr>
+                <td>#{{ r.id }}</td>
+                <td>{{ r.name }}</td>
+                <td>{{ r.email }}</td>
+                <td>{{ r.course_name }}</td>
+                <td>{{ r.registered_on }}</td>
+              </tr>
+              {% else %}
+              <tr><td colspan="5" class="empty-cell">No registrations yet.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Course Stats -->
+      <div class="table-card">
+        <h3>Enrolments by Course</h3>
+        {% for cs in course_stats %}
+        <div class="progress-row">
+          <span>{{ cs.course_name }}</span>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill"
+                 style="width: {{ [((cs.count / (total_reg if total_reg > 0 else 1)) * 100)|int, 100]|min }}%"></div>
+          </div>
+          <span class="prog-count">{{ cs.count }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Today's Attendance -->
+    <div class="table-card mt-30">
+      <h3>Today's Attendance ({{ today }})</h3>
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr><th>#</th><th>Name</th><th>Email</th><th>Course</th><th>Session</th><th>Status</th><th>Time</th></tr>
+          </thead>
+          <tbody>
+            {% for r in today_records %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>{{ r.name }}</td>
+              <td>{{ r.email }}</td>
+              <td>{{ r.course_name }}</td>
+              <td>{{ r.session }}</td>
+              <td><span class="badge badge-{{ 'green' if r.status=='Present' else ('yellow' if r.status=='Late' else 'red') }}">{{ r.status }}</span></td>
+              <td>{{ r.marked_at.strftime('%I:%M %p') if r.marked_at else '—' }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="7" class="empty-cell">No attendance marked today yet.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

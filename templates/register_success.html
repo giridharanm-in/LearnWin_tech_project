@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Registration Successful – Besant Technologies{% endblock %}
+
+{% block content %}
+<section class="section center">
+  <div class="container">
+    <div class="success-card">
+      <div class="success-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h1>Registration Successful!</h1>
+      <p class="success-sub">Welcome to Besant Technologies, <strong>{{ reg.name }}</strong>!</p>
+
+      <div class="reg-details">
+        <div class="reg-row">
+          <span class="reg-label">Registration ID</span>
+          <span class="reg-value highlight">#{{ reg.id }}</span>
+        </div>
+        <div class="reg-row">
+          <span class="reg-label">Course Enrolled</span>
+          <span class="reg-value">{{ reg.course_name }}</span>
+        </div>
+        <div class="reg-row">
+          <span class="reg-label">Duration</span>
+          <span class="reg-value">{{ reg.duration }}</span>
+        </div>
+        <div class="reg-row">
+          <span class="reg-label">Email</span>
+          <span class="reg-value">{{ reg.email }}</span>
+        </div>
+        <div class="reg-row">
+          <span class="reg-label">Phone</span>
+          <span class="reg-value">{{ reg.phone }}</span>
+        </div>
+        <div class="reg-row">
+          <span class="reg-label">Registered On</span>
+          <span class="reg-value">{{ reg.registered_on }}</span>
+        </div>
+      </div>
+
+      <div class="success-note">
+        <i class="fas fa-info-circle"></i>
+        Please save your Registration ID <strong>#{{ reg.id }}</strong>.
+        Our team will contact you within 24 hours to share batch details.
+      </div>
+
+      <div class="success-actions">
+        <a href="{{ url_for('index') }}" class="btn btn-outline">← Back to Home</a>
+        <a href="{{ url_for('attendance') }}" class="btn btn-primary">Mark Attendance</a>
+        <a href="{{ url_for('courses') }}" class="btn btn-outline">Browse More Courses</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

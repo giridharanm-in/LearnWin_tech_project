@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}My Attendance Records – Besant Technologies{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <h1>My Attendance Records</h1>
+    <p>Enter your email to view your complete attendance history.</p>
+    <nav class="breadcrumb"><a href="{{ url_for('index') }}">Home</a> › Attendance Records</nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <!-- Search Form -->
+    <div class="search-card">
+      <form method="POST" action="{{ url_for('attendance_records') }}" class="search-form">
+        <div class="search-group">
+          <i class="fas fa-search search-icon-input"></i>
+          <input type="email" name="email" value="{{ email_search }}"
+                 placeholder="Enter your registered email address…" required/>
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </form>
+    </div>
+
+    {% if searched %}
+      {% if records %}
+        <!-- Stats Row -->
+        {% set present = records|selectattr('status','equalto','Present')|list|length %}
+        {% set late    = records|selectattr('status','equalto','Late')|list|length %}
+        {% set absent  = records|selectattr('status','equalto','Absent')|list|length %}
+        <div class="att-stats">
+          <div class="att-stat-card green">
+            <i class="fas fa-check-circle"></i>
+            <strong>{{ present }}</strong>
+            <span>Present</span>
+          </div>
+          <div class="att-stat-card yellow">
+            <i class="fas fa-clock"></i>
+            <strong>{{ late }}</strong>
+            <span>Late</span>
+          </div>
+          <div class="att-stat-card red">
+            <i class="fas fa-times-circle"></i>
+            <strong>{{ absent }}</strong>
+            <span>Absent</span>
+          </div>
+          <div class="att-stat-card blue">
+            <i class="fas fa-calendar-check"></i>
+            <strong>{{ records|length }}</strong>
+            <span>Total</span>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-card">
+          <h3>Attendance History for <em>{{ email_search }}</em></h3>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Course</th>
+                  <th>Date</th>
+                  <th>Session</th>
+                  <th>Status</th>
+                  <th>Marked At</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for r in records %}
+                <tr>
+                  <td>{{ loop.index }}</td>
+                  <td>{{ r.name }}</td>
+                  <td>{{ r.course_name }}</td>
+                  <td>{{ r.att_date }}</td>
+                  <td>{{ r.session }}</td>
+                  <td>
+                    <span class="badge badge-{{ 'green' if r.status=='Present' else ('yellow' if r.status=='Late' else 'red') }}">
+                      {{ r.status }}
+                    </span>
+                  </td>
+                  <td>{{ r.marked_at.strftime('%d %b %Y %I:%M %p') if r.marked_at else '—' }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      {% else %}
+        <div class="empty-state">
+          <i class="fas fa-search fa-3x"></i>
+          <h3>No records found</h3>
+          <p>No attendance records found for <strong>{{ email_search }}</strong>.</p>
+          <p>Make sure you're using your registered email address.</p>
+          <a href="{{ url_for('attendance') }}" class="btn btn-primary mt-10">Mark Attendance Now</a>
+        </div>
+      {% endif %}
+    {% endif %}
+
+  </div>
+</section>
+{% endblock %}

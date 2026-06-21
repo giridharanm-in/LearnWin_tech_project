@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Attendance Logs – Admin{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <h1>Attendance Logs</h1>
+    <p>Filter attendance records by date.</p>
+    <nav class="breadcrumb">
+      <a href="{{ url_for('index') }}">Home</a> ›
+      <a href="{{ url_for('admin') }}">Admin</a> › Attendance
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <!-- Date Filter -->
+    <form method="GET" class="date-filter-form">
+      <label for="date">Filter by Date:</label>
+      <input type="date" id="date" name="date" value="{{ filter_date }}"/>
+      <button type="submit" class="btn btn-primary">Filter</button>
+      <a href="{{ url_for('admin') }}" class="btn btn-outline">← Dashboard</a>
+    </form>
+
+    <div class="table-card mt-20">
+      <div class="table-header-row">
+        <h3>Attendance on {{ filter_date }} — {{ records|length }} records</h3>
+      </div>
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr><th>#</th><th>Name</th><th>Email</th><th>Course</th><th>Session</th><th>Status</th><th>Marked At</th></tr>
+          </thead>
+          <tbody>
+            {% for r in records %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>{{ r.name }}</td>
+              <td>{{ r.email }}</td>
+              <td>{{ r.course_name }}</td>
+              <td>{{ r.session }}</td>
+              <td><span class="badge badge-{{ 'green' if r.status=='Present' else ('yellow' if r.status=='Late' else 'red') }}">{{ r.status }}</span></td>
+              <td>{{ r.marked_at.strftime('%d %b %Y %I:%M %p') if r.marked_at else '—' }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="7" class="empty-cell">No attendance records for this date.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block title %}Mark Attendance – Besant Technologies{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <h1>Mark Attendance</h1>
+    <p>Fill in your details to mark attendance for today's class.</p>
+    <nav class="breadcrumb"><a href="{{ url_for('index') }}">Home</a> › Attendance</nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container form-container">
+    <div class="form-card">
+      <div class="form-header">
+        <i class="fas fa-clipboard-check"></i>
+        <h2>Attendance Form</h2>
+        <p>No login required. Just enter your details below.</p>
+      </div>
+
+      <form method="POST" action="{{ url_for('attendance') }}" class="main-form" novalidate>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Full Name <span class="req">*</span></label>
+            <input type="text" id="name" name="name" placeholder="Your registered name" required maxlength="120"/>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address <span class="req">*</span></label>
+            <input type="email" id="email" name="email" placeholder="Your registered email" required maxlength="150"/>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="course_id">Course <span class="req">*</span></label>
+            <select id="course_id" name="course_id" required>
+              <option value="">-- Select Your Course --</option>
+              {% for course in courses %}
+              <option value="{{ course.id }}">{{ course.course_name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="att_date">Date <span class="req">*</span></label>
+            <input type="date" id="att_date" name="att_date" value="{{ today }}" required/>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="session">Session <span class="req">*</span></label>
+            <select id="session" name="session" required>
+              <option value="Morning">Morning</option>
+              <option value="Afternoon">Afternoon</option>
+              <option value="Evening">Evening</option>
+              <option value="Full Day">Full Day</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" name="status">
+              <option value="Present">✅ Present</option>
+              <option value="Late">⏰ Late</option>
+              <option value="Absent">❌ Absent</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-info-box">
+          <i class="fas fa-info-circle"></i>
+          <span>Attendance can be marked only once per session per course per day.</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">
+          <i class="fas fa-check"></i> Mark Attendance
+        </button>
+      </form>
+    </div>
+
+    <!-- Side -->
+    <div class="form-side">
+      <div class="side-card">
+        <h3><i class="fas fa-search accent-icon"></i> Check My Attendance</h3>
+        <p>View your complete attendance history using your email address.</p>
+        <a href="{{ url_for('attendance_records') }}" class="btn btn-outline btn-block mt-10">View Records</a>
+      </div>
+      <div class="side-card">
+        <h3><i class="fas fa-calendar-alt accent-icon"></i> Today's Date</h3>
+        <p class="big-date">{{ today }}</p>
+        <p>Make sure to mark attendance before the session ends.</p>
+      </div>
+      <div class="side-card">
+        <h3><i class="fas fa-exclamation-circle accent-icon"></i> Reminder</h3>
+        <ul class="info-list">
+          <li>Use your registered email address</li>
+          <li>Each session can be marked only once</li>
+          <li>Contact admin for corrections</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

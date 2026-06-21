@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Besant Technologies{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<!-- ── Top Bar ── -->
+<div class="topbar">
+  <div class="container topbar-inner">
+    <span><i class="fas fa-phone"></i> +91 99403 95926</span>
+    <span><i class="fas fa-envelope"></i> info@besanttechnologies.com</span>
+    <span><i class="fas fa-map-marker-alt"></i> Chennai, Tamil Nadu</span>
+  </div>
+</div>
+
+<!-- ── Navbar ── -->
+<nav class="navbar">
+  <div class="container nav-inner">
+    <a href="{{ url_for('index') }}" class="brand">
+      <span class="brand-b">B</span><span class="brand-rest">esant</span>
+      <span class="brand-tech">Technologies</span>
+    </a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle"/>
+    <label for="nav-toggle" class="hamburger"><span></span><span></span><span></span></label>
+    <ul class="nav-links">
+      <li><a href="{{ url_for('index') }}" {% if request.endpoint=='index' %}class="active"{% endif %}>Home</a></li>
+      <li><a href="{{ url_for('courses') }}" {% if request.endpoint=='courses' %}class="active"{% endif %}>Courses</a></li>
+      <li><a href="{{ url_for('register') }}" {% if request.endpoint=='register' %}class="active"{% endif %}>Register</a></li>
+      <li><a href="{{ url_for('attendance') }}" {% if request.endpoint=='attendance' %}class="active"{% endif %}>Attendance</a></li>
+      <li><a href="{{ url_for('about') }}" {% if request.endpoint=='about' %}class="active"{% endif %}>About</a></li>
+      <li><a href="{{ url_for('contact') }}" {% if request.endpoint=='contact' %}class="active"{% endif %}>Contact</a></li>
+      <li><a href="{{ url_for('admin') }}" class="btn-nav">Admin</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── Flash Messages ── -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <div class="flash-container">
+    {% for cat, msg in messages %}
+    <div class="flash flash-{{ cat }}">
+      <i class="fas fa-{% if cat=='success' %}check-circle{% elif cat=='error' %}exclamation-circle{% else %}info-circle{% endif %}"></i>
+      {{ msg }}
+      <button class="flash-close" onclick="this.parentElement.remove()">×</button>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endwith %}
+
+<!-- ── Page Content ── -->
+{% block content %}{% endblock %}
+
+<!-- ── Footer ── -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <h3 class="footer-brand"><span class="brand-b">B</span>esant Technologies</h3>
+      <p>Empowering students with industry-ready skills through world-class training programs since 2012.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="{{ url_for('courses') }}">All Courses</a></li>
+        <li><a href="{{ url_for('register') }}">Register</a></li>
+        <li><a href="{{ url_for('attendance') }}">Mark Attendance</a></li>
+        <li><a href="{{ url_for('attendance_records') }}">My Attendance</a></li>
+        <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Popular Courses</h4>
+      <ul>
+        <li><a href="#">Python Programming</a></li>
+        <li><a href="#">Full Stack Development</a></li>
+        <li><a href="#">Data Science</a></li>
+        <li><a href="#">Machine Learning</a></li>
+        <li><a href="#">AWS Cloud</a></li>
+        <li><a href="#">Selenium Testing</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p><i class="fas fa-map-marker-alt"></i> No. 14, 1st Floor, Mambalam High Road, T. Nagar, Chennai – 600 017</p>
+      <p><i class="fas fa-phone"></i> +91 99403 95926</p>
+      <p><i class="fas fa-envelope"></i> info@besanttechnologies.com</p>
+      <p><i class="fas fa-clock"></i> Mon – Sat: 9:00 AM – 7:00 PM</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Besant Technologies. All Rights Reserved. | Crafted with ❤️ in Chennai</p>
+  </div>
+</footer>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

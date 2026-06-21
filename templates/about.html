@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}About Us – Besant Technologies{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <h1>About Besant Technologies</h1>
+    <p>Our story, mission, and values.</p>
+    <nav class="breadcrumb"><a href="{{ url_for('index') }}">Home</a> › About</nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <span class="section-tag">Our Story</span>
+        <h2>Empowering Tech Careers Since 2012</h2>
+        <p>Besant Technologies was founded with a single vision: make world-class IT education accessible to every aspiring student in India, completely free of cost.</p>
+        <p>Over the decade, we have trained more than 50,000 students across Chennai and beyond, helping them land jobs at top companies like TCS, Infosys, Wipro, Cognizant, and many more.</p>
+        <p>Our curriculum is designed by industry practitioners and updated every quarter to reflect real-world demands — so you learn what employers actually need.</p>
+        <div class="about-stats">
+          <div class="ab-stat"><strong>50K+</strong><span>Students Trained</span></div>
+          <div class="ab-stat"><strong>12+</strong><span>Years Experience</span></div>
+          <div class="ab-stat"><strong>20+</strong><span>Courses Offered</span></div>
+          <div class="ab-stat"><strong>100%</strong><span>Free Education</span></div>
+        </div>
+      </div>
+      <div class="about-img-col">
+        <div class="about-img-placeholder">
+          <i class="fas fa-graduation-cap fa-5x"></i>
+          <p>Besant Technologies</p>
+          <small>Chennai, Tamil Nadu</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-light">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Our Values</span>
+      <h2>What We Stand For</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card"><i class="fas fa-heart"></i><h3>Accessibility</h3><p>Education is a right, not a privilege. Every course is free forever.</p></div>
+      <div class="value-card"><i class="fas fa-star"></i><h3>Quality</h3><p>Industry-expert instructors and real-world curriculum updated quarterly.</p></div>
+      <div class="value-card"><i class="fas fa-hands-helping"></i><h3>Community</h3><p>Peer learning, mentorship, and a vibrant alumni network of 50K+.</p></div>
+      <div class="value-card"><i class="fas fa-rocket"></i><h3>Career Focus</h3><p>Every course is designed to make you job-ready, not just certificate-ready.</p></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

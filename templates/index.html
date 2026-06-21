@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% block title %}Besant Technologies – Free IT Courses in Chennai{% endblock %}
+
+{% block content %}
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <span class="hero-badge"><i class="fas fa-certificate"></i> 100% Free Courses – No Hidden Fees</span>
+    <h1 class="hero-title">Learn. Grow. <br><span class="accent">Excel in IT.</span></h1>
+    <p class="hero-sub">Join 50,000+ students who launched their tech career with Besant Technologies.
+      Industry-expert instructors · Hands-on projects · Job-ready skills.</p>
+    <div class="hero-cta">
+      <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg">
+        <i class="fas fa-user-plus"></i> Enrol Free Today
+      </a>
+      <a href="{{ url_for('courses') }}" class="btn btn-outline btn-lg">
+        <i class="fas fa-book-open"></i> Browse Courses
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong>50K+</strong><span>Students</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><strong>20+</strong><span>Courses</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><strong>100%</strong><span>Free</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><strong>10+</strong><span>Years</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Why Choose Us ── -->
+<section class="section why-us">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Why Besant</span>
+      <h2>Why 50,000+ Students Choose Us</h2>
+      <p>We don't just teach technology – we build careers.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-laptop-code"></i></div>
+        <h3>Hands-On Training</h3>
+        <p>Real-world projects, live coding sessions, and industry case studies in every module.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+        <h3>Expert Instructors</h3>
+        <p>Learn from working professionals with 10+ years of industry experience.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-infinity"></i></div>
+        <h3>Lifetime Access</h3>
+        <p>Access all course materials, recordings, and updates forever – no expiry.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-certificate"></i></div>
+        <h3>Industry Certificates</h3>
+        <p>Earn recognised certificates that boost your resume and LinkedIn profile.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-users"></i></div>
+        <h3>Community Support</h3>
+        <p>Active alumni network, peer study groups, and 24×7 doubt-clearing forums.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-rupee-sign"></i></div>
+        <h3>Completely Free</h3>
+        <p>No registration fee, no course fee, no hidden charges. Education for everyone.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Featured Courses ── -->
+<section class="section courses-preview bg-light">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Top Picks</span>
+      <h2>Featured Free Courses</h2>
+      <p>Start learning with our most popular programs.</p>
+    </div>
+    <div class="courses-grid">
+      {% for course in courses[:8] %}
+      <div class="course-card">
+        <div class="course-card-top cat-{{ loop.index % 6 }}">
+          <i class="fas fa-code"></i>
+          <span class="course-tag">{{ course.category }}</span>
+        </div>
+        <div class="course-card-body">
+          <h3>{{ course.course_name }}</h3>
+          <p>{{ course.description[:100] }}{% if course.description|length > 100 %}…{% endif %}</p>
+          <div class="course-meta">
+            <span><i class="fas fa-clock"></i> {{ course.duration }}</span>
+            <span><i class="fas fa-signal"></i> {{ course.mode }}</span>
+          </div>
+          <div class="course-footer">
+            <span class="price-tag free"><i class="fas fa-tag"></i> FREE</span>
+            <a href="{{ url_for('register') }}?course={{ course.id }}" class="btn btn-sm btn-primary">Enrol Now</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="center mt-40">
+      <a href="{{ url_for('courses') }}" class="btn btn-outline btn-lg">View All Courses <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Quick Actions ── -->
+<section class="section quick-actions">
+  <div class="container">
+    <div class="qa-grid">
+      <div class="qa-card qa-register">
+        <i class="fas fa-user-plus"></i>
+        <h3>Register for a Course</h3>
+        <p>Pick your course and register in under 2 minutes. No account needed.</p>
+        <a href="{{ url_for('register') }}" class="btn btn-white">Register Now</a>
+      </div>
+      <div class="qa-card qa-attendance">
+        <i class="fas fa-clipboard-check"></i>
+        <h3>Mark Attendance</h3>
+        <p>Mark your presence for today's class quickly and easily.</p>
+        <a href="{{ url_for('attendance') }}" class="btn btn-white">Mark Now</a>
+      </div>
+      <div class="qa-card qa-records">
+        <i class="fas fa-chart-bar"></i>
+        <h3>Check My Attendance</h3>
+        <p>View your full attendance history with just your email address.</p>
+        <a href="{{ url_for('attendance_records') }}" class="btn btn-white">View Records</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Testimonials ── -->
+<section class="section testimonials bg-light">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Student Love</span>
+      <h2>What Our Students Say</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"The Python course at Besant was incredible. From zero to building real apps in 45 days. Got placed at Infosys!"</p>
+        <div class="testi-author"><strong>Arun Kumar</strong> – Software Engineer, Infosys</div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Full Stack course content is industry-level and completely free! The instructors are very supportive. Highly recommended."</p>
+        <div class="testi-author"><strong>Priya Ramesh</strong> – Full Stack Developer, TCS</div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Data Science course with hands-on ML projects gave me the confidence to crack my dream job at a top MNC."</p>
+        <div class="testi-author"><strong>Karthik S.</strong> – Data Analyst, Wipro</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

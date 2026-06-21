@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Contact Us – Besant Technologies{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <h1>Contact Us</h1>
+    <p>We'd love to hear from you. Reach out anytime.</p>
+    <nav class="breadcrumb"><a href="{{ url_for('index') }}">Home</a> › Contact</nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container form-container">
+    <div class="form-card">
+      <div class="form-header">
+        <i class="fas fa-envelope"></i>
+        <h2>Send Us a Message</h2>
+        <p>We typically reply within 24 hours.</p>
+      </div>
+      <form method="POST" action="{{ url_for('contact') }}" class="main-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Full Name <span class="req">*</span></label>
+            <input type="text" id="name" name="name" placeholder="Your name" required/>
+          </div>
+          <div class="form-group">
+            <label for="email">Email <span class="req">*</span></label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required/>
+          </div>
+        </div>
+        <div class="form-group full-width">
+          <label for="subject">Subject <span class="req">*</span></label>
+          <input type="text" id="subject" name="subject" placeholder="What is this about?" required/>
+        </div>
+        <div class="form-group full-width">
+          <label for="message">Message <span class="req">*</span></label>
+          <textarea id="message" name="message" rows="5" placeholder="Your message…" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">
+          <i class="fas fa-paper-plane"></i> Send Message
+        </button>
+      </form>
+    </div>
+
+    <div class="form-side">
+      <div class="side-card">
+        <h3><i class="fas fa-map-marker-alt accent-icon"></i> Visit Us</h3>
+        <p>No. 14, 1st Floor, Mambalam High Road, T. Nagar, Chennai – 600 017, Tamil Nadu, India</p>
+      </div>
+      <div class="side-card">
+        <h3><i class="fas fa-phone accent-icon"></i> Call Us</h3>
+        <p class="big-contact">+91 99403 95926</p>
+        <p>Mon – Sat · 9:00 AM – 7:00 PM</p>
+      </div>
+      <div class="side-card">
+        <h3><i class="fas fa-envelope accent-icon"></i> Email Us</h3>
+        <p class="big-contact">info@besanttechnologies.com</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

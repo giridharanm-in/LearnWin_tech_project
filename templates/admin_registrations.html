@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}All Registrations – Admin{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <h1>All Registrations</h1>
+    <p>Complete list of enrolled students.</p>
+    <nav class="breadcrumb">
+      <a href="{{ url_for('index') }}">Home</a> ›
+      <a href="{{ url_for('admin') }}">Admin</a> › Registrations
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="table-card">
+      <div class="table-header-row">
+        <h3>Total: {{ regs|length }} Registrations</h3>
+        <a href="{{ url_for('admin') }}" class="btn btn-outline btn-sm">← Dashboard</a>
+      </div>
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th><th>Name</th><th>Email</th><th>Phone</th>
+              <th>Course</th><th>Gender</th><th>Qualification</th><th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for r in regs %}
+            <tr>
+              <td>#{{ r.id }}</td>
+              <td>{{ r.name }}</td>
+              <td>{{ r.email }}</td>
+              <td>{{ r.phone }}</td>
+              <td>{{ r.course_name }}</td>
+              <td>{{ r.gender }}</td>
+              <td>{{ r.qualification }}</td>
+              <td>{{ r.registered_on }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="8" class="empty-cell">No registrations found.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
