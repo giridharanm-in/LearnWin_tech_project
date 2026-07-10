@@ -1,4 +1,4 @@
-# 🎓 Besant Technologies – Student Portal
+# 🎓 LearnWin Tech Academy – Student Portal
 
 A fully functional **Flask + MySQL** web application for Besant Technologies, an IT training institute in Chennai. Students can register for free courses and mark attendance — no login or OTP required.
 
@@ -175,4 +175,4 @@ MIT License – free to use and modify.
 
 ---
 
-> Built with ❤️ for Besant Technologies, Chennai.
+> Built with ❤️ for LearnWin Tech Academy, Chennai.
