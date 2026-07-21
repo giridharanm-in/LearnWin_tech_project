@@ -96,7 +96,7 @@ Start MySQL and run the schema file:
 mysql -u root -p < schema.sql
 ```
 
-This creates the `besant_tech` database with all tables and seeds 20 courses automatically.
+This creates the `LearnWin_tech` database with all tables and seeds 20 courses automatically.
 
 ### 5. Configure Database Credentials
 
@@ -163,7 +163,7 @@ git init
 git add .
 git commit -m "Initial commit – Besant Technologies Portal"
 git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/besant-tech-portal.git
+git remote add origin https://github.com/YOUR_USERNAME/LearnWin-tech-portal.git
 git push -u origin main
 ```
 
