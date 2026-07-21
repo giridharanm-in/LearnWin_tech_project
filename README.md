@@ -169,6 +169,30 @@ git push -u origin main
 
 ---
 
+---
+# 🎓 LearnWin Tech Academy
+
+End-to-end Student Analytics System built using Python, MySQL and Power BI.
+
+## 📌 Project Highlights
+
+- Student Management System
+- MySQL Database
+- Power BI Dashboard
+- Attendance Analytics
+- Registration Analytics
+- Course Analytics
+
+## 📷 Dashboard Preview
+
+![Dashboard](Dashboard.png)
+
+➡ **View the complete dashboard documentation here**
+
+👉 [Dashboard Documentation](README-Dashboard.md)
+
+
+---
 ## 📄 License
 
 MIT License – free to use and modify.
